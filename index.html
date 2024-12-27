@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>貼心霸氣的網頁男友</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      overflow: hidden;
+      position: relative;
+    }
+    .button {
+      display: block;
+      margin: 100px auto;
+      padding: 20px 40px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #fff;
+      background-color: #007BFF;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .text {
+      position: absolute;
+      font-weight: bold;
+      animation: float 5s linear infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(100%); }
+      100% { transform: translateY(-100%); }
+    }
+  </style>
+</head>
+<body>
+  <button class="button" id="drinkWaterBtn">提醒我喝水</button>
+
+  <script>
+    const sexyPhrases = [
+      "你看起來比水還誘人，我忍不住了。",
+      "快喝完，然後過來讓我好好嘗嘗。",
+      "喝水是前奏，後面才是高潮。",
+      "你喝水的樣子真性感，我都渴了。",
+      "水潤過你的喉嚨後，我的手想滑過你。",
+      "別只喝水，來吧，讓我滿足你的渴望。",
+      "我想要的不只是水，而是你。",
+      "你的每一滴汗都比水甜，快喝完來抱我。",
+      "喝水能解渴，但我想被你解放。",
+      "喝完水才有力氣應付我，準備好了嗎？"
+    ];
+
+    let confirmationCount = 0;
+    const drinkWaterBtn = document.getElementById('drinkWaterBtn');
+
+    drinkWaterBtn.addEventListener('click', () => {
+      showReminder();
+    });
+
+    function showReminder() {
+      if (confirmationCount < 3) {
+        const messages = [
+          "寶貝，真的喝了嗎？不要敷衍我喔～",
+          "確定你乖乖喝水了？別讓我失望，不然我會罰你哦！",
+          "你在騙我對不對？快證明給我看！"
+        ];
+        if (confirm(messages[confirmationCount])) {
+          confirmationCount++;
+          if (confirmationCount < 3) showReminder();
+          else displaySexyPhrases();
+        }
+      }
+    }
+
+    function displaySexyPhrases() {
+      const body = document.body;
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+          const phrase = document.createElement('div');
+          phrase.classList.add('text');
+          phrase.innerText = sexyPhrases[Math.floor(Math.random() * sexyPhrases.length)];
+          phrase.style.left = Math.random() * window.innerWidth + 'px';
+          phrase.style.top = Math.random() * window.innerHeight + 'px';
+          phrase.style.fontSize = Math.random() * 30 + 20 + 'px';
+          phrase.style.color = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+          phrase.style.textStroke = Math.random() > 0.5 ? '1px black' : 'none';
+          phrase.style.textShadow = Math.random() > 0.5 ? '2px 2px 4px rgba(0,0,0,0.5)' : 'none';
+          body.appendChild(phrase);
+        }, i * 100);
+      }
+    }
+  </script>
+</body>
+</html>
